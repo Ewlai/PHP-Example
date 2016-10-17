@@ -1,0 +1,60 @@
+<?php
+/*
+Subject Code and Section: BTI320B
+ Student Name: Eldon Lai
+ Date Submitted:  Oct 14/2014
+Student Declaration
+I/we declare that the attached assignment is my/our own work in accordance with Seneca Academic Policy. No part of this assignment has been copied manually or electronically from any other source (including web sites) or distributed to other students.
+Name Eldon Lai
+Student ID 053931127
+*/
+	class A2 {
+
+	//prints name
+	public function name() {
+		echo "Eldon's Badminton Store";
+	}
+
+	//prints footer
+	public function footer() {
+		echo "Copyright &copy; 2014 Eldon's Badminton Store";
+	}
+
+	// opens database connection
+	public function openDB() {
+		// get database servername, username, password, and database name
+		//  from local file not on web accessible path (remove newline/blanks)
+		$lines = file('/home/int322/secret/topsecret');
+		$dbserver = trim($lines[0]);
+		$uid = trim($lines[1]);
+		$pw = trim($lines[2]);
+		$dbname = trim($lines[3]);
+
+		//Connect to the mysql server and get back our link_identifier
+ 		$link = mysqli_connect($dbserver, $uid, $pw, $dbname) 
+			or die('Could not connect: ' . mysqli_error($link));
+
+		return $link;
+	}
+
+	//menu 
+	public function menu($value, $user, $role){
+		echo "<table border='1' width='100%'>
+	<tr>
+		<td>  
+			<a href='add.php'>Add</a> 
+		</td>
+		<td>  
+			<a href='unsetDesc.php'>View All</a> 
+		</td>
+		<td>  <form method='post'  action='view.php'>  Search in description: <input type='text' name='desc'  value=$value>  <input type='submit' value='Search'></form></td>
+		<td> User: $user Role: $role </td>
+		<td>  <a href='logout.php'> Log Out </a></td>
+	</tr>
+</table>";
+	}
+	
+	}
+	
+
+?>
